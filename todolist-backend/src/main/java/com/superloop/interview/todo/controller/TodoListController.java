@@ -7,22 +7,29 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
+import com.superloop.interview.todo.exception.BadRequestException;
 import com.superloop.interview.todo.model.TodoItem;
 import com.superloop.interview.todo.repository.TodoListRepository;
 
 /**
+ * provide restful APIs for frontend
+ * 
  * @author David Ding
  */
 @RestController
 @CrossOrigin
 public class TodoListController {
 	private final Logger log = LoggerFactory.getLogger(TodoListController.class);
+
+	private final static int DESCRIPTION_MAX_LENGTH = 500;
 
 	@Autowired
 	private TodoListRepository todoListRepository;
@@ -32,7 +39,7 @@ public class TodoListController {
 		Long id = todoListRepository.createItem(todoItem);
 		return new ResponseEntity<Long>(id, HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/item/update")
 	public ResponseEntity<String> updateItem(@RequestBody TodoItem todoItem) {
 		todoListRepository.updateItem(todoItem);
@@ -55,11 +62,30 @@ public class TodoListController {
 		todoListRepository.deleteItem(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/item/complete/{id}")
 	public ResponseEntity<String> completeItem(@PathVariable("id") Long id) {
 		todoListRepository.completeItem(id);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	private void checkId(Long id) {
+		if (id == null || id < 0) {
+			throw new BadRequestException();
+		}
+	}
+
+	/**
+	 * check item obj "name" is required if "description" exist, the maxLength
+	 * is 500.
+	 * 
+	 * @param todoItem
+	 */
+	private void checkItem(TodoItem todoItem) {
+		if (todoItem == null || StringUtils.isEmpty(todoItem.getName())
+				|| (todoItem.getDescription() != null && todoItem.getDescription().length() > DESCRIPTION_MAX_LENGTH)) {
+			throw new BadRequestException();
+		}
 	}
 
 }

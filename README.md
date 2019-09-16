@@ -18,6 +18,7 @@ cd todolist-backend
 gradle bootRun
 ```
 
+
 A restful API project will be started in localhost:8080 <br>
 6 APIs are provided by the project:
 
@@ -46,6 +47,13 @@ private String dueDate;
 private boolean done;
 // to mark if the todo task is overtime
 private boolean overTime;
+```
+
+to test project:
+
+```
+cd todolist-backend
+gradle test
 ```
 
 ### Frontend Project

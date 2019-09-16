@@ -6,6 +6,11 @@ import java.util.Date;
 
 import org.springframework.util.StringUtils;
 
+/**
+ * Util to format date
+ * @author David Ding
+ *
+ */
 public class DateUtil {
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     

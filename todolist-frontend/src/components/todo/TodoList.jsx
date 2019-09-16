@@ -65,8 +65,7 @@ class TodoList extends React.Component {
 
     render() {
         let {list, actions, filter} = this.props;
-        console.log("list======");
-        console.log(list);
+
         list.map(item => {
             item.handleFinish = index => actions.completeTodo(index);
             item.handleDelete = index => actions.deleteTodo(index);

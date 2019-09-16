@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.superloop.interview.todo.model.TodoItem;
 
+/**
+ * one implement of TodoListRepository interface based on HashMap in memory
+ * @author David Ding
+ *
+ */
 @Service
 public class TodoListMemRepository implements TodoListRepository {
 

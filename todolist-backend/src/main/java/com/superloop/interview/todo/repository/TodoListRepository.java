@@ -4,16 +4,21 @@ import java.util.List;
 
 import com.superloop.interview.todo.model.TodoItem;
 
+/**
+ * 
+ * @author David Ding
+ *
+ */
 public interface TodoListRepository {
-    List<TodoItem> findItems();
+	List<TodoItem> findItems();
 
-    TodoItem findOneItemById(long id);
-    
-    void completeItem(long id);
-    
-    long createItem(TodoItem item);
-    
-    void updateItem(TodoItem item);
+	TodoItem findOneItemById(long id);
 
-    void deleteItem(long id);
+	void completeItem(long id);
+
+	long createItem(TodoItem item);
+
+	void updateItem(TodoItem item);
+
+	void deleteItem(long id);
 }

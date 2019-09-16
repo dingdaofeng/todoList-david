@@ -7,25 +7,28 @@ import com.superloop.interview.todo.util.DateUtil;
 import com.superloop.interview.todo.util.IdFactory;
 
 /**
+ * Object Model
+ * 
  * @author David Ding
  */
 
 public class TodoItem {
-    private long id;
-    private String name;
-    private String description;
-    
-    private String dueDate;
-    
-    private boolean done;
-    
-    private boolean overTime;
-    
-    private Date creationTime;
+	// unique id
+	private long id;
 
-    
-    
-    public String getName() {
+	private String name;
+	private String description;
+
+	private String dueDate;
+
+	// to mark if the todo task is completed
+	private boolean done;
+	// to mark if the todo task is overtime
+	private boolean overTime;
+
+	private Date creationTime;
+
+	public String getName() {
 		return name;
 	}
 
@@ -74,24 +77,28 @@ public class TodoItem {
 	}
 
 	public TodoItem() {
-		
+
 	}
-	
+
 	public TodoItem(String name, String description, String dueDate) {
 		this.id = IdFactory.getInstance().next();
-        this.name = name;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.done = false;
-        this.creationTime = new Date();
-    }
-	
-	public void complete(){
+		this.name = name;
+		this.description = description;
+		this.dueDate = dueDate;
+		this.done = false;
+		this.creationTime = new Date();
+	}
+
+	public void complete() {
 		this.done = true;
 	}
-	
-	//if current time after dueDate, means over time;
-	public boolean checkOverTime(){
+
+	/**
+	 * if current time reach dueDate, means over time;
+	 * 
+	 * @return
+	 */
+	public boolean checkOverTime() {
 		boolean isOverTime = false;
 		Date dueDateObj = null;
 		try {
@@ -100,16 +107,15 @@ public class TodoItem {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(dueDateObj!=null){
+		if (dueDateObj != null) {
 			isOverTime = new Date().after(dueDateObj);
 		}
 		return isOverTime;
 	}
-	
+
 	@Override
-	public String toString(){
-		return "name:" + name + ", description:" + description + ", dueDate" + dueDate
-				+ ", done:" + done;
+	public String toString() {
+		return "name:" + name + ", description:" + description + ", dueDate" + dueDate + ", done:" + done;
 	}
 
 }
