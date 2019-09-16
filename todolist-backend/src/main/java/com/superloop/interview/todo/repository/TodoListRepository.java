@@ -3,11 +3,9 @@ package com.superloop.interview.todo.repository;
 import java.util.List;
 
 import com.superloop.interview.todo.model.TodoItem;
-import com.superloop.interview.todo.type.ItemStatus;
-
 
 public interface TodoListRepository {
-    List<TodoItem> findItemsByStatus(ItemStatus itemStatus);
+    List<TodoItem> findItems();
 
     TodoItem findOneItemById(long id);
     

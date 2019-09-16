@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.superloop.interview.todo.model.TodoItem;
-import com.superloop.interview.todo.type.ItemStatus;
 
 @Service
 public class TodoListMemRepository implements TodoListRepository {
@@ -21,12 +20,12 @@ public class TodoListMemRepository implements TodoListRepository {
 	Logger log = LoggerFactory.getLogger(TodoListMemRepository.class);
 	
 	/**
-	 * when find items by status, we sort the result by id, and if any pending item is overTime, mark it
+	 * when find items, we sort the result by id, and if any pending item is overTime, mark it
 	 */
 	@Override
-	public List<TodoItem> findItemsByStatus(ItemStatus itemStatus) {
-		List<TodoItem> result = itemMap.values().stream().filter(x -> itemStatus.equals(x.getStatus())).map(x -> {
-			if (ItemStatus.Pending.equals(x.getStatus()) && x.checkOverTime()) {
+	public List<TodoItem> findItems() {
+		List<TodoItem> result = itemMap.values().stream().map(x -> {
+			if ((x.isDone() == false) && x.checkOverTime()) {
 				x.setOverTime(true);
 			} 
 			return x;

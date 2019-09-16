@@ -7,21 +7,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import com.superloop.interview.todo.model.TodoItem;
 import com.superloop.interview.todo.repository.TodoListRepository;
-import com.superloop.interview.todo.type.ItemStatus;
 
 /**
  * @author David Ding
  */
 @RestController
+@CrossOrigin
 public class TodoListController {
 	private final Logger log = LoggerFactory.getLogger(TodoListController.class);
 
@@ -40,9 +39,9 @@ public class TodoListController {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
-	@GetMapping("/item/list/{statusValue}")
-	public ResponseEntity<Iterable<TodoItem>> listItems(@PathVariable("statusValue") Integer statusValue) {
-		List<TodoItem> itemList = todoListRepository.findItemsByStatus(ItemStatus.fromValue(statusValue));
+	@GetMapping("/item/list")
+	public ResponseEntity<Iterable<TodoItem>> listItems() {
+		List<TodoItem> itemList = todoListRepository.findItems();
 		return new ResponseEntity<>(itemList, HttpStatus.OK);
 	}
 

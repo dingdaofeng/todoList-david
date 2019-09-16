@@ -1,8 +1,9 @@
 package com.superloop.interview.todo.model;
 
+import java.text.ParseException;
 import java.util.Date;
 
-import com.superloop.interview.todo.type.ItemStatus;
+import com.superloop.interview.todo.util.DateUtil;
 import com.superloop.interview.todo.util.IdFactory;
 
 /**
@@ -14,9 +15,9 @@ public class TodoItem {
     private String name;
     private String description;
     
-    private Date dueDate;
+    private String dueDate;
     
-    private ItemStatus status;
+    private boolean done;
     
     private boolean overTime;
     
@@ -40,29 +41,25 @@ public class TodoItem {
 		this.description = description;
 	}
 
-	public Date getDueDate() {
+	public String getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
 
-	public ItemStatus getStatus() {
-		return status;
+	public boolean isDone() {
+		return done;
 	}
 
-	public void setStatus(ItemStatus status) {
-		this.status = status;
+	public void setDone(boolean done) {
+		this.done = done;
 	}
-
-
 
 	public boolean isOverTime() {
 		return overTime;
 	}
-
-
 
 	public void setOverTime(boolean overTime) {
 		this.overTime = overTime;
@@ -80,28 +77,39 @@ public class TodoItem {
 		
 	}
 	
-	public TodoItem(String name, String description, Date dueDate) {
+	public TodoItem(String name, String description, String dueDate) {
 		this.id = IdFactory.getInstance().next();
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
-        this.status = ItemStatus.Pending;
+        this.done = false;
         this.creationTime = new Date();
     }
 	
 	public void complete(){
-		this.status = ItemStatus.Done;
+		this.done = true;
 	}
 	
 	//if current time after dueDate, means over time;
 	public boolean checkOverTime(){
-		return new Date().after(dueDate);
+		boolean isOverTime = false;
+		Date dueDateObj = null;
+		try {
+			dueDateObj = DateUtil.parse(dueDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(dueDateObj!=null){
+			isOverTime = new Date().after(dueDateObj);
+		}
+		return isOverTime;
 	}
 	
 	@Override
 	public String toString(){
 		return "name:" + name + ", description:" + description + ", dueDate" + dueDate
-				+ ", status:" + status;
+				+ ", done:" + done;
 	}
 
 }
