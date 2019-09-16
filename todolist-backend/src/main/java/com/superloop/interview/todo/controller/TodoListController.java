@@ -36,12 +36,14 @@ public class TodoListController {
 
 	@PostMapping("/item/add")
 	public ResponseEntity<Long> createItem(@RequestBody TodoItem todoItem) {
+		checkItem(todoItem);
 		Long id = todoListRepository.createItem(todoItem);
 		return new ResponseEntity<Long>(id, HttpStatus.OK);
 	}
 
 	@PostMapping("/item/update")
 	public ResponseEntity<String> updateItem(@RequestBody TodoItem todoItem) {
+		checkItem(todoItem);
 		todoListRepository.updateItem(todoItem);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
@@ -54,17 +56,20 @@ public class TodoListController {
 
 	@GetMapping("/item/get/{id}")
 	public ResponseEntity<TodoItem> getItem(@PathVariable("id") Long id) {
+		checkId(id);
 		return new ResponseEntity<>(todoListRepository.findOneItemById(id), HttpStatus.OK);
 	}
 
 	@PostMapping("/item/delete/{id}")
 	public ResponseEntity<String> deleteItem(@PathVariable("id") Long id) {
+		checkId(id);
 		todoListRepository.deleteItem(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@PostMapping("/item/complete/{id}")
 	public ResponseEntity<String> completeItem(@PathVariable("id") Long id) {
+		checkId(id);
 		todoListRepository.completeItem(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
