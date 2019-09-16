@@ -8,7 +8,8 @@ export function addTodo({name, description, dueDate}) {
         payload: {
             name,
             description:description,
-            dueDate: dueDate? dueDate.toISOString().slice(0,10) : ''
+            dueDate: dueDate?
+                     new Date(dueDate.getTime() - (dueDate.getTimezoneOffset() * 60000 )).toISOString().slice(0,10) : ''
         }
     };
 }
@@ -43,7 +44,8 @@ export function updateTodo({id, name, description, dueDate}) {
             id,
             name,
             description:description,
-            dueDate: dueDate? dueDate.toISOString().slice(0,10) : ''
+            dueDate: dueDate?
+                     new Date(dueDate.getTime() - (dueDate.getTimezoneOffset() * 60000 )).toISOString().slice(0,10) : ''
         }
     };
 }
