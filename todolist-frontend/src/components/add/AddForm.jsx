@@ -21,10 +21,8 @@ class AddForm extends React.Component {
             if (errors) {
 
             } else {
-                let payload = this.props.form.getFieldsValue();
-                this.props.handleAdd(payload);
+                this.props.handleAdd(values);
                 alert("add item completed");
-                this.props.handleTodoLink();
             }
         });
     }
@@ -66,6 +64,7 @@ class AddForm extends React.Component {
                 placeholder: 'Please select time'
             }
         };
+
         return (
             <Form horizontal onSubmit={this.handleSubmit}>
                 <FormItem {...formItemLayout} label='Name' required>

@@ -6,7 +6,7 @@ import { routerReducer } from 'react-router-redux';
 
 import reducers from './reducers';
 
-import { ADD_TODO, COMPLITE_TODO, DELETE_TODO } from '../constants/ActionTypes';
+import { ADD_TODO, COMPLITE_TODO, UPDATE_TODO, DELETE_TODO } from '../constants/ActionTypes';
 import { SHOW_TODO } from '../constants/FilterTypes';
 
 let updateStorage = store => next => action => {
@@ -14,10 +14,16 @@ let updateStorage = store => next => action => {
         case ADD_TODO:
             apiClient.post('add', action.payload)
               .then((response)=>{
+
             })
             break;
         case COMPLITE_TODO:
             apiClient.post('complete/' + action.index)
+              .then((response)=>{
+            })
+            break;
+        case UPDATE_TODO:
+            apiClient.post('update' , action.payload)
               .then((response)=>{
             })
             break;
@@ -38,13 +44,6 @@ let store = wrapStoreWithMiddleware(combineReducers({
     filter: reducers.filter,
     routing: routerReducer
 })
-// , {
-//     list: storage.get(),
-//     filter: SHOW_TODO,
-//     routing: ''
-// }
 );
-
-
 
 export default store;

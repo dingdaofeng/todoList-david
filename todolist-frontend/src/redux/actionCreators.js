@@ -38,7 +38,7 @@ export function setFilter(filter) {
 
 export function updateTodo({id, name, description, dueDate}) {
     return {
-        type: ADD_TODO,
+        type: UPDATE_TODO,
         payload: {
             id,
             name,
