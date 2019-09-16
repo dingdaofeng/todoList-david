@@ -2,7 +2,7 @@
 
 
 /todolist-frontend/node_modules
-/todolist-frontend/build
+/todolist-frontend/package-lock.json
 
 /todolist-backend/.gradle
 /todolist-backend/build

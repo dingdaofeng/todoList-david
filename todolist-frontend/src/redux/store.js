@@ -22,7 +22,9 @@ let updateStorage = store => next => action => {
             })
             break;
         case DELETE_TODO:
-            storage.delete(action.index);
+            apiClient.post('delete/' + action.index)
+              .then((response)=>{
+            })
             break;
     }
     let result = next(action);

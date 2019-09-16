@@ -19,6 +19,7 @@ ReactDom.render(
             <Route path="/" component={App}>
                 <Route path="todo" component={TodoPage} />
                 <Route path="add" component={AddPage} />
+                <Route path="update/:index" component={AddPage} />
                 <IndexRedirect to="todo" />
             </Route>
         </Router>

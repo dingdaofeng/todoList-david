@@ -7,14 +7,6 @@ function list(state = [], action) {
     switch (action.type) {
         case FRESH_TODO:
             return action.payload;
-        case ADD_TODO:
-            alert(state);
-            return [
-                ...state,
-                Object.assign({}, action.payload, {
-                    done: false
-                })
-            ];
         case COMPLITE_TODO:
             return [...state].map(item => {
                 item.id === action.index && (item.done = true);

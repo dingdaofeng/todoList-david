@@ -23,6 +23,7 @@ class AddForm extends React.Component {
             } else {
                 let payload = this.props.form.getFieldsValue();
                 this.props.handleAdd(payload);
+                alert("add item completed");
                 this.props.handleTodoLink();
             }
         });

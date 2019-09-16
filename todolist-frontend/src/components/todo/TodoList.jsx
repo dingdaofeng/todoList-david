@@ -4,6 +4,11 @@ import React from 'react';
 import {Table, Icon} from 'antd';
 import { apiClient } from '../../service/apiclient';
 
+const overTimeStyle = {
+  color: 'red',
+  fontWeight:'bold'
+};
+
 const columns = [
     {
         title: 'Name',
@@ -14,7 +19,16 @@ const columns = [
         title: 'Due Date',
         dataIndex: 'dueDate',
         key: 'dueDate',
-        width: '25%'
+        width: '25%',
+        render: (text, record) => (
+          <span>
+              {record.filter === 'SHOW_TODO' && record.overTime === true? (
+                  <span style = {overTimeStyle}>
+                      {text}
+                  </span>
+              ) : <span>{text}</span>}
+          </span>
+        )
     }, {
         title: 'Operation',
         key: 'operation',
@@ -46,8 +60,6 @@ class TodoList extends React.Component {
 
     render() {
         let {list, actions, filter} = this.props;
-
-
 
         list.map(item => {
             item.handleFinish = index => actions.completeTodo(index);
