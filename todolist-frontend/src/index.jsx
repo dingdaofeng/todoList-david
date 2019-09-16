@@ -10,6 +10,7 @@ import store from './redux/store';
 import App from './containers/App';
 import TodoPage from './components/todo/TodoPage';
 import AddPage from './components/add/AddPage';
+import UpdatePage from './components/update/UpdatePage';
 
 let syncHistory = syncHistoryWithStore(browserHistory, store);
 
@@ -19,7 +20,7 @@ ReactDom.render(
             <Route path="/" component={App}>
                 <Route path="todo" component={TodoPage} />
                 <Route path="add" component={AddPage} />
-                <Route path="update/:index" component={AddPage} />
+                <Route path="update/:index" component={UpdatePage} />
                 <IndexRedirect to="todo" />
             </Route>
         </Router>

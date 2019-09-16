@@ -14,7 +14,12 @@ const columns = [
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        width: '50%'
+        width: '50%',
+        render: (text, record) => (
+          <span>
+              <a href={`/todolist/update/${record.id}`}>{text}</a>
+          </span>
+        )
     }, {
         title: 'Due Date',
         dataIndex: 'dueDate',
@@ -60,7 +65,8 @@ class TodoList extends React.Component {
 
     render() {
         let {list, actions, filter} = this.props;
-
+        console.log("list======");
+        console.log(list);
         list.map(item => {
             item.handleFinish = index => actions.completeTodo(index);
             item.handleDelete = index => actions.deleteTodo(index);
