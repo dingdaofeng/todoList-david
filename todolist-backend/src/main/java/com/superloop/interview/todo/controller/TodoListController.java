@@ -43,6 +43,7 @@ public class TodoListController {
 
 	@PostMapping("/item/update")
 	public ResponseEntity<String> updateItem(@RequestBody TodoItem todoItem) {
+		checkId(todoItem.getId());
 		checkItem(todoItem);
 		todoListRepository.updateItem(todoItem);
 		return new ResponseEntity<String>(HttpStatus.OK);

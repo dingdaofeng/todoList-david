@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.superloop.interview.todo.TestObjectMother;
+import com.superloop.interview.todo.exception.BadRequestException;
 import com.superloop.interview.todo.model.TodoItem;
 
 import junit.framework.TestCase;
@@ -24,7 +25,7 @@ public class TodoListMemRepositoryTest {
 
 		System.out.println(todoListRepository.itemMap);
 	}
-
+	
 	@Test
 	public void testFindOneItemById() {
 		TodoItem item = TestObjectMother.buildTodoItem();
